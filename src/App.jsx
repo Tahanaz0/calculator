@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 function App() {
   const [currentInput, setCurrentInput] = useState('');
-  const [result, setResult] = useState('');
+ 
   const handleInput = (value) => {
     setCurrentInput(currentInput + value);
   }
@@ -13,8 +13,15 @@ function App() {
   }
   const handleAllClear = () => {
     setCurrentInput('');
-    setResult('');
+    setCurrentInput('');
   }
+  const calculateResult = () => {
+    try {
+      setCurrentInput(eval(currentInput).toString());
+    } catch (error) {
+      setCurrentInput('Error');
+    }
+  };
  
   return (
     <div className="App">
@@ -30,7 +37,7 @@ function App() {
             </button>
        {/* <button type="button" class="btn btn-link"><span class='bi bi-arrow-left-circle-fill'></span></button> */}
         <button className='btn' style={{backgroundColor: '#9a9a9a',color:'black' }} onClick={() => handleInput('%')}>%</button>
-        <button className='btn' style={{backgroundColor:'#ee9406'}} onClick={() => handleInput('/')}> /</button>
+        <button className='btn' style={{backgroundColor:'#ee9406'}} onClick={() => handleInput('/')}>&divide;</button>
         <button className='btn' style={{backgroundColor:'#2f2f2f'}} onClick={() => handleInput('7')}> 7 </button>
         <button className='btn' style={{backgroundColor:'#2f2f2f'}} onClick={() => handleInput('8')}> 8 </button>
         <button className='btn' style={{backgroundColor:'#2f2f2f'}} onClick={() => handleInput('9')}> 9 </button>
@@ -46,7 +53,7 @@ function App() {
         <button className='btn' style={{backgroundColor:'#2f2f2f'}} onClick={() => handleInput('0')}> 0 </button>
         <button className='btn' style={{backgroundColor:'#2f2f2f'}} onClick={() => handleInput('00')}> 00 </button>
         <button className='btn' style={{backgroundColor:'#2f2f2f'}} onClick={() => handleInput('.')}> . </button>
-        <button className='btn' style={{backgroundColor:'#ee9406'}} > = </button>
+        <button className='btn' style={{backgroundColor:'#ee9406'}} onClick={calculateResult} > = </button>
        </div>
     </div>
   );
